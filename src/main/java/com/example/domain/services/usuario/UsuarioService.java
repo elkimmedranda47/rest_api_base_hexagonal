@@ -1,6 +1,7 @@
 package com.example.domain.services.usuario;
 
 import com.example.domain.exceptions.ConflictException;
+import com.example.domain.exceptions.NotFoundException;
 import com.example.domain.models.usuario.Usuario;
 import com.example.domain.persistence_ports.usuario.UsuarioPersistence;
 
@@ -57,7 +58,48 @@ public class UsuarioService {
         }
     }
 
+    /*public Usuario update(Long id) {
+        return this.usuarioPersistence.update(id);
+    }*/
 
+
+    public Usuario update(Long id, Usuario usuarioActualizado) {
+        if (id != null && usuarioActualizado != null) {
+           
+            // Valida si el usuario existe
+        Usuario existingUsuario = this.usuarioPersistence.read(id);
+        if (existingUsuario == null) {
+            throw new NotFoundException("Usuario id: " + id + " no encontrado");
+        }
+
+        // Valida si el correo actualizado ya existe
+        String updatedEmail = usuarioActualizado.getEmail();
+        if (!existingUsuario.getEmail().equals(updatedEmail) && this.usuarioPersistence.existsEmail(updatedEmail)) {
+            throw new ConflictException("Email ya existe: " + updatedEmail);
+        }
+
+        // Actualiza la información del usuario con la nueva información
+        existingUsuario.setFirstName(usuarioActualizado.getFirstName());
+        existingUsuario.setEmail(updatedEmail);
+        existingUsuario.setLastName(usuarioActualizado.getLastName());
+        existingUsuario.setDateOfBirth(usuarioActualizado.getDateOfBirth());
+        existingUsuario.setAddress(usuarioActualizado.getAddress());
+        //existingUsuario.setToken(usuarioActualizado.getToken());
+        existingUsuario.setPassword(usuarioActualizado.getPassword());
+        existingUsuario.setMobilePhone(usuarioActualizado.getMobilePhone());
+
+        // Guarda el usuario actualizado en el repositorio
+        return this.usuarioPersistence.update(id, existingUsuario);
+
+        } else {
+            // Puedes lanzar una excepción o devolver null según tus requisitos
+            throw new IllegalArgumentException("El ID y/o el usuario actualizado no pueden ser nulos");
+        }
+
+        
+
+    }
+    
 
 
 

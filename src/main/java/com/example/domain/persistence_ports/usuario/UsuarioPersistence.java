@@ -13,11 +13,16 @@ public interface UsuarioPersistence {
 
     Usuario create(Usuario usuario);
 
-    Usuario update(Long id, Usuario usuario);
+    //Usuario update(Long id);
 
     Usuario read(Long id); // se comento aqui
    
     Usuario delete(Long id);
+
+    Usuario update(Long id, Usuario usuarioActualizado);
+
+  
+
 
     boolean existsEmail(String email);
 }

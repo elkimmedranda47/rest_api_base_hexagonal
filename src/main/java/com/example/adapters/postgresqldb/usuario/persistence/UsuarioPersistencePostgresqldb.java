@@ -68,12 +68,7 @@ import java.util.stream.Stream;
                 .toUsuario();
     }
     
-    @Override
-    public Usuario update(Long id, Usuario usuario) {
-        
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
-    }
-
+   
  
     @Override
     public boolean existsEmail(String email) {
@@ -98,15 +93,40 @@ import java.util.stream.Stream;
         // Assuming that you want to return null when the id is null
         return null;
     }
-}
 
-  
    
 
 
+}
 
 
+  
+  
 
+public Usuario update(Long id, Usuario usuarioActualizado) {
 
+    if (id != null && usuarioActualizado != null) {
+
+        UsuarioEntity usuarioEntity = this.usuarioRepository
+        //ArticleEntity articleEntity = this.articleRepository
+        .findById(usuarioActualizado.getId())
+        .orElseThrow(() -> new NotFoundException("Usuario id: " + usuarioActualizado.getId()));
+        usuarioEntity.fromUsuario(usuarioActualizado);
+        return this.usuarioRepository.save(usuarioEntity) .toUsuario();
+
+               
+        //return   usuarioActualizado;
+    } else {
+        throw new IllegalArgumentException("El ID y/o el usuario actualizado no pueden ser nulos");
+    }
+    
+    // this.usuarioRepository
+    
 
 }
+
+
+
+
+
+}// fin clase

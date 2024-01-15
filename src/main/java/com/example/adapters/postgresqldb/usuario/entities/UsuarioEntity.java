@@ -87,7 +87,9 @@ public class UsuarioEntity {
                 '}';
     }
 
-
+    public void fromUsuario(Usuario usuario) {
+        BeanUtils.copyProperties(usuario, this);
+    }
 
     public Usuario toUsuario() {
         Usuario usuairo = new Usuario();

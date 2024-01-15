@@ -57,6 +57,13 @@ public class UsuarioResource {
         return this.usuarioService.delete(id);
     }
 
+    // estamso qui
+     @PutMapping("/users/{id}")
+    public Usuario update(@PathVariable Long id, @RequestBody Usuario usuario) {
+        // Implement your logic for updating a usuario
+        return this.usuarioService.update(id, usuario);
+    }
+
 
     /* 
     @GetMapping("/users")
