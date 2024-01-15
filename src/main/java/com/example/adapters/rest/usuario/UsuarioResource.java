@@ -2,22 +2,24 @@ package com.example.adapters.rest.usuario;
 
 
 //import  com.example.adapters.rest.LexicalAnalyzer;
-
 import  com.example.domain.models.usuario.Usuario;
 //import com.example.domain.models.usuairo.ArticlePriceUpdating;
-
 import com.example.domain.services.usuario.UsuarioService;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 //import java.util.List; // se comento aqui
+
+
 
 @RestController
 @RequestMapping(UsuarioResource.USUARIOS)
 
 public class UsuarioResource {
     //static final String USUARIOS = "/usuario";  // Change this path as needed
-    static final String USUARIOS = "/v1"; 
+    static final String USUARIOS = "/api/v1"; 
 
     private final UsuarioService usuarioService;
 
@@ -26,7 +28,7 @@ public class UsuarioResource {
         this.usuarioService = usuarioService;
     }
 
-    @PostMapping("/crear")
+    @PostMapping("/users")
     public Usuario create(@RequestBody Usuario usuario) {
         // Implement your logic for creating a usuario
         return this.usuarioService.create(usuario);
@@ -34,12 +36,40 @@ public class UsuarioResource {
         
     }
 
-  /*  @GetMapping("/{id}")
+   @GetMapping("/users/{id}")
     public Usuario getById(@PathVariable Long id) {
         // Implement your logic for getting a usuario by ID
-        return this.usuarioService.getById(id);
+        return this.usuarioService.read(id);
     }
 
+     @GetMapping("/users")
+    public  List<Usuario> readAll() {
+        // Implement your logic for searching usuarios based on criteria
+        // You can use LexicalAnalyzer for extracting values from the query string
+        System.out.println  ("llegamos");
+       return  this.usuarioService.readAll();
+    }
+
+ 
+   /*  @DeleteMapping("/users/{id}")
+    public Usuario delete(@PathVariable Long id) {
+        // Implement your logic for getting a usuario by ID
+        return this.usuarioService.delete(id);
+    }*/
+
+
+    /* 
+    @GetMapping("/users")
+    public  void readAll() {
+        // Implement your logic for searching usuarios based on criteria
+        // You can use LexicalAnalyzer for extracting values from the query string
+         this.usuarioService.readAll();
+    }*/
+
+
+
+
+ /*
     @GetMapping("/search")
     public List<Usuario> findByCriteria(@RequestParam String q) {
         // Implement your logic for searching usuarios based on criteria

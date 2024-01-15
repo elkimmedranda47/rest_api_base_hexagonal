@@ -14,9 +14,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;  // Agregada importación para @Table
+import jakarta.persistence.Table;  
 @Entity
-@Table(name = "usuario")  // Nombre de la tabla en la base de datos
+@Table(name = "usuario")  
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -94,4 +94,8 @@ public class UsuarioEntity {
         BeanUtils.copyProperties(this, usuairo);
         return usuairo;
     }
+
+    
+
+
 }

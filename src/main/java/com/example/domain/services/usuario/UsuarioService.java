@@ -9,6 +9,8 @@ import com.example.domain.persistence_ports.usuario.UsuarioPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
 //import java.util.stream.Stream;
 
 @Service
@@ -31,15 +33,23 @@ public class UsuarioService {
         return this.usuarioPersistence.create(usuario);
     }
 
-     public Usuario read(Usuario usuario) {
-
-        return this.usuarioPersistence.read(usuario.getId());
+     public Usuario read(Long id) {
+        return this.usuarioPersistence.read(id);
     } // se comento aqui
 
-    public void readAll() {
+    /*   public void readAll() {
          this.usuarioPersistence.readAll();
     }
+    */
+
+    public List<Usuario> readAll() {
+    return this.usuarioPersistence.readAll().collect(Collectors.toList());
+    }
     
+   /*  public Usuario delete(Long id) {
+        return this.usuarioPersistence.dele(id);
+    }*/
+   
     
     public void assertEmailNotExist(String email) {
         if (this.usuarioPersistence.existsEmail(email)) {
@@ -48,7 +58,7 @@ public class UsuarioService {
     }
 
 
-   
+
 
 
 /*   public Stream<Article> findByProviderAndPriceGreaterThan(String provider, BigDecimal price) {
