@@ -16,7 +16,8 @@ public interface UsuarioPersistence {
     Usuario update(Long id, Usuario usuario);
 
     Usuario read(Long id); // se comento aqui
-   // Usuario dele(Long id);
+   
+    Usuario delete(Long id);
 
     boolean existsEmail(String email);
 }

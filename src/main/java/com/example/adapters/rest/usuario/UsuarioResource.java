@@ -51,11 +51,11 @@ public class UsuarioResource {
     }
 
  
-   /*  @DeleteMapping("/users/{id}")
+    @DeleteMapping("/users/{id}")
     public Usuario delete(@PathVariable Long id) {
         // Implement your logic for getting a usuario by ID
         return this.usuarioService.delete(id);
-    }*/
+    }
 
 
     /* 

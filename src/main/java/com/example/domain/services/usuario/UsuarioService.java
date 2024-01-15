@@ -46,9 +46,9 @@ public class UsuarioService {
     return this.usuarioPersistence.readAll().collect(Collectors.toList());
     }
     
-   /*  public Usuario delete(Long id) {
-        return this.usuarioPersistence.dele(id);
-    }*/
+    public Usuario delete(Long id) {
+        return this.usuarioPersistence.delete(id);
+    }
    
     
     public void assertEmailNotExist(String email) {

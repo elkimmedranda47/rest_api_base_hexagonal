@@ -82,6 +82,24 @@ import java.util.stream.Stream;
     }
 
 
+
+   public Usuario delete(Long id) {
+    if (id != null) {
+        UsuarioEntity usuarioEntity = this.usuarioRepository
+                .findById(id)
+                .orElseThrow(() -> new NotFoundException("Usuario id: " + id));
+
+        // Elimina el usuario del repositorio
+        this.usuarioRepository.deleteById(id);
+
+        // Devuelve el usuario eliminado (convertido si es necesario)
+        return usuarioEntity.toUsuario();
+    } else {
+        // Assuming that you want to return null when the id is null
+        return null;
+    }
+}
+
   
    
 
